@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.muliamaulana.diloevent.DetailEventActivity"
+    tools:showIn="@layout/activity_detail_event">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:id="@+id/date_time_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@+id/nama_event">
+
+            <TextView
+                android:id="@+id/tanggal_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="19 November 2016"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_separator"
+                android:layout_marginRight="@dimen/margin_separator"
+                android:background="#727272"/>
+
+            <TextView
+                android:id="@+id/waktu_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="10:00"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/detail_nama_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/date_time_event"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="Workshop I: Digital Industry Intro"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+        <LinearLayout
+            android:id="@+id/kolom_kuota"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/detail_nama_event"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_people"
+                android:tint="#666666"/>
+
+            <TextView
+                android:id="@+id/kuota_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="50"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/deskripsi_event"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_below="@id/kolom_kuota"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="@string/large_text"/>
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

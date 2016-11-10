@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "656625557034",
+    "firebase_url": "https://dilo-event.firebaseio.com",
+    "project_id": "dilo-event",
+    "storage_bucket": "dilo-event.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656625557034:android:536fa36a53c4869c",
+        "android_client_info": {
+          "package_name": "com.muliamaulana.diloevent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656625557034-574chtonhkcqvh198il6m19pn9hh0mu7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.muliamaulana.diloevent",
+            "certificate_hash": "0625D841E5B2F846E2BFF206FD33DF8BD23FE4A1"
+          }
+        },
+        {
+          "client_id": "656625557034-c824q6kq61a3k40rt1tgcu1ubpv4gkjp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAge-FUkUIPS3tyjcLQUUlskxZS_C8zd5c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656625557034-c824q6kq61a3k40rt1tgcu1ubpv4gkjp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
