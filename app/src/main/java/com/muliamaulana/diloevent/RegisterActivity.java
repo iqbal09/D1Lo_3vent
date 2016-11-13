@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -15,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -37,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        mpost_key = getIntent().getExtras().getString("event_id");
+        mpost_key = getIntent().getExtras().getString("event-id");
         nameField = (EditText) findViewById(R.id.name_field);
         emailField = (EditText) findViewById(R.id.email_field);
         phoneField = (EditText) findViewById(R.id.phone_field);
@@ -55,7 +57,6 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         mDatabase = FirebaseDatabase.getInstance().getReference("user");
-
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
             phoneField.setError("Please enter your phone number");
         }
         if (!isValidPhoneNumber(phone)){
-            phoneField.setError("Please enter your phone number");
+            phoneField.setError("Invalid phone number");
         }
         if (TextUtils.isEmpty(password)){
             passwordField.setError("Please enter your password");
@@ -103,12 +104,14 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+
+                    FirebaseUser mUser = mAuth.getCurrentUser();
                     String user_id= mAuth.getCurrentUser().getUid();
-                    DatabaseReference user_database = mDatabase.push();
-                    user_database.child("UserID").setValue(user_id);
-                    user_database.child("Nama").setValue(name);
-                    user_database.child("Email").setValue(email);
-                    user_database.child("Phone").setValue(phone);
+                    mDatabase.child(mUser.getUid()).child("Nama").setValue(name);
+                    mDatabase.child(mUser.getUid()).child("Phone").setValue(phone);
+                    mDatabase.child(mUser.getUid()).child("Email Address").setValue(email);
+                    mDatabase.child(mUser.getUid()).child("User ID").setValue(user_id);
+                    mDatabase.child(mUser.getUid()).child("Event diikuti").setValue(mpost_key);
 
                     loading.dismiss();
 
@@ -124,9 +127,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void register_gagal() {
         new MaterialDialog.Builder(this)
-                .content("Oops...  Something wrong. Login Failed")
-                .positiveText("Retry")
-                .negativeText("Cancel").canceledOnTouchOutside(false)
+                .content("Oops...  Ada yang salah. Registrasi gagal")
+                .positiveText("Coba Lagi")
+                .negativeText("Batal").canceledOnTouchOutside(false)
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
