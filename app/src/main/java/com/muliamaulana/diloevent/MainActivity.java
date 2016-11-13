@@ -1,5 +1,6 @@
 package com.muliamaulana.diloevent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,12 +12,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.muliamaulana.diloevent.fragmentActivity.AboutUsFragment;
 import com.muliamaulana.diloevent.fragmentActivity.EventFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
 
         //tampilkan EventFragment langsung ditampilkan pada Main Activity
         FragmentTransaction pindahFragment = getSupportFragmentManager().beginTransaction();
@@ -98,10 +105,17 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_main, aboutUsFragment, aboutUsFragment.getTag()).commit();
         } else if (id == R.id.nav_login){
 
-        } else if (id == R.id.nav_event_diikuti) {
+        } else if (id == R.id.nav_register){
+            Intent intentRegister = new Intent(MainActivity.this,RegisterActivity.class);
+            startActivity(intentRegister);
+        }
+        else if (id == R.id.nav_event_diikuti) {
 
         } else if (id == R.id.nav_logout) {
-
+            mAuth.signOut();
+            onBackPressed();
+            Toast.makeText(this,"Log out Success", Toast.LENGTH_LONG).show();
+            return true;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

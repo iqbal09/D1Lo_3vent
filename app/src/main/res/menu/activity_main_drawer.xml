@@ -21,6 +21,10 @@
                 android:icon="@mipmap/ic_launcher"
                 android:title="Login"/>
             <item
+                android:id="@+id/nav_register"
+                android:icon="@mipmap/ic_launcher"
+                android:title="Register"/>
+            <item
                 android:id="@+id/nav_event_diikuti"
                 android:icon="@drawable/ic_event_available"
                 android:title="Event yang diikuti" />

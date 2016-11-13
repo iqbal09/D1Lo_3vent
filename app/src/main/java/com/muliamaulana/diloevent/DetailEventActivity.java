@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -21,6 +22,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.muliamaulana.diloevent.fragmentActivity.EventFragment;
 import com.muliamaulana.diloevent.setget.Event;
 
@@ -31,18 +35,13 @@ public class DetailEventActivity extends AppCompatActivity {
     private TextView txtNamaEvent, txtTanggalEvent, txtWaktuEvent, txtKuota, txtDeskripsi;
     private ProgressBar progressBar;
 
+    private FirebaseAuth mAuth;
+
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mpost_key = getIntent().getExtras().getString("event_id");
-        namaEvent = getIntent().getStringExtra("nama_event");
-        image_url = getIntent().getStringExtra("image_event");
-        tanggalEvent= getIntent().getStringExtra("tanggal_event");
-        waktuEvent = getIntent().getStringExtra("waktu_event");
-        kuotaEvent = getIntent().getStringExtra("kuota_event");
-        deskripsiEvent = getIntent().getStringExtra("deskripsi_event");
-
         setContentView(R.layout.activity_detail_event);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,16 +52,37 @@ public class DetailEventActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
+        mpost_key = getIntent().getExtras().getString("event_id");
+        namaEvent = getIntent().getStringExtra("nama_event");
+        image_url = getIntent().getStringExtra("image_event");
+        tanggalEvent= getIntent().getStringExtra("tanggal_event");
+        waktuEvent = getIntent().getStringExtra("waktu_event");
+        kuotaEvent = getIntent().getStringExtra("kuota_event");
+        deskripsiEvent = getIntent().getStringExtra("deskripsi_event");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(namaEvent);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("user");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                Intent DetailEvent = new Intent(DetailEventActivity.this, RegisterActivity.class);
+                DetailEvent.putExtra("event-id",mpost_key);
+                DetailEvent.putExtra("nama_event",namaEvent);
+                DetailEvent.putExtra("image_event",image_url);
+                DetailEvent.putExtra("tanggal_event",tanggalEvent);
+                DetailEvent.putExtra("waktu_event", waktuEvent);
+                DetailEvent.putExtra("kuota_event",kuotaEvent);
+                DetailEvent.putExtra("deskripsi_event",deskripsiEvent);
+                startActivity(DetailEvent);
+
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
 

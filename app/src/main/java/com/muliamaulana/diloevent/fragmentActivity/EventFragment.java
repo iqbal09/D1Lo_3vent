@@ -66,7 +66,8 @@ public class EventFragment extends Fragment {
         //Menampilkan loading data event
         progressLoading = new MaterialDialog.Builder(getActivity())
                 .content("Loading...")
-                .progress(true, 0).canceledOnTouchOutside(false).cancelable(false)
+                .progress(true, 0)
+                .canceledOnTouchOutside(false)
                 .show();
 
 
